@@ -4,6 +4,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { join } from 'path';
+import { AuthModule } from './auth/auth.module';
+import { ArticlesModule } from './articles/articles.module';
+import { CommentsModule } from './comments/comments.module';
+import { FileSystemModule } from './file-system/file-system.module';
 
 @Module({
   imports: [
@@ -21,6 +25,10 @@ import { join } from 'path';
         'dist/**/*.entity{.ts,.js}',
       ],
     }),
+    AuthModule,
+    ArticlesModule,
+    CommentsModule,
+    FileSystemModule,
   ],
   controllers: [AppController],
   providers: [AppService],

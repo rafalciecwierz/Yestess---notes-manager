@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany } from "typeorm";
 import { AbstractEntity } from "./abstract.entity";
+import { CommentEntity } from "./comment.entity";
 import { UserEntity } from "./user.entity";
 
 
@@ -14,4 +15,7 @@ export class ArticleEntity extends AbstractEntity {
 
     @ManyToOne(() => UserEntity, entity => entity.articles)
     author: UserEntity;
+
+    @OneToMany(() => CommentEntity, entity => entity.article)
+    comments: CommentEntity[];
 }

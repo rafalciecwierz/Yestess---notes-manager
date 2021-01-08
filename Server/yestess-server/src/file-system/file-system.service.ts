@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserEntity } from 'src/entities/user.entity';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,8 +12,12 @@ export class FileSystemService {
     private xmlPath = path.join(__dirname,'..', '..','src', 'files', 'json', 'users.xml')
 
     readUsersFromXML() {
-        const rawdata = fs.readFileSync(this.xmlPath);
-        return rawdata.toString();
+        try{
+            const rawdata = fs.readFileSync(this.xmlPath);
+            return rawdata.toString();
+        } catch(err){
+            throw new NotFoundException("File not found")
+        }
     }
 
 
